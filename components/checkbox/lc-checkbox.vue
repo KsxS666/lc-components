@@ -1,16 +1,21 @@
 <template>
 	<view :class="['checkbox-all-area', {'disabled':disabled}]" @click="handleClick">
 		<view class="checkbox_inner">
-			<view :class="['checkbox_input', {'is_checked':value}]"></view>
+			<block v-if="!group">
+				<view :class="['checkbox_input', {'is_checked': currentValue}]"></view>
+			</block>
+			<block v-else>
+				<view :class="['checkbox_input', {'is_checked': currentValue2}]"></view>
+			</block>
 			<view class="checkbox_label"><slot></slot></view>
 		</view>
-
 	</view>
 </template>
 
 <script>
+	 import { findComponentUpward } from '../../utils/assist.js'
 	export default {
-		name: 'lc-checkbox',
+		name: 'LcCheckbox',
 		props: {
 			value: {
 				type: Boolean,
@@ -27,17 +32,58 @@
 			falseValue: {
 				type: [String, Number, Boolean],        
 				default: false,
+			},
+			label: {
+			    type: [String, Number, Boolean]
 			}
 		},
 		data() {
 			return {
-				currentValue: this.value
+				currentValue: this.value,
+				currentValue2: false,
+				model: [],
+				group: false,
+				parent: null
 			}
+		},
+		mounted() {
+			this.parent = findComponentUpward(this, 'LcCheckboxGroup')
+			console.log(this.parent)
+			if(this.parent) this.group = true
+			if(this.group) this.parent.updateModel(true)
+			else this.updateModel()
 		},
 		methods: {
 			handleClick() {
 				if(this.disabled) return
-				this.$emit('input', !this.value)
+				const checked = this.value
+				this.currentValue = checked
+				const value = checked ? this.falseValue : this.trueValue
+				if(this.group) {
+					if(!this.currentValue2) {
+						this.model.push(this.label)
+						this.currentValue2 = true
+					} else {
+						this.model.splice(this.model.findIndex(ele => ele === this.label), 1)
+						this.currentValue2 = false
+					}
+					console.log(this.model)
+					this.parent.change(this.model)
+				} else {
+					this.$emit('input', value)
+				}
+			},
+			updateModel() {
+				this.currentValue = this.value === this.trueValue
+			}
+		},
+		watch: {
+			value(newVal) {
+				if (newVal === this.trueValue || newVal === this.falseValue) {
+				    this.updateModel()
+				} else {
+				    throw 'Value should be trueValue or falseValue.'
+				}
 			}
 		}
 	}
