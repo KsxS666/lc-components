@@ -13,7 +13,14 @@
  */
 
 /* 颜色变量 */
-
+//引入colors色盘配置
+@import "cndapp-ui/components/style/color/_colors.scss";
+//引入colors状态颜色改变
+@import "cndapp-ui/components/style/color/statusColors.scss";
+//引入fonts字阶行高配置
+@import "cndapp-ui/components/style/font/_font.scss";
+//引入公共样式
+@import "cndapp-ui/components/style/common.scss";
 /* 行为相关颜色 */
 $uni-color-primary: #007aff;
 $uni-color-success: #4cd964;

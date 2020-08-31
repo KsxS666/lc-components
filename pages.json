@@ -11,6 +11,18 @@
 			"style": {
 				"navigationBarTitleText": "checkbox"
 			}
+		},
+		{
+			"path": "pages/radio/index",
+			"style": {
+				"navigationBarTitleText": "radio"
+			}
+		},
+		{
+			"path": "pages/datepicker/index",
+			"style": {
+				"navigationBarTitleText": "datepicker时间选择器"
+			}
 		}
 	],
 	"globalStyle": {

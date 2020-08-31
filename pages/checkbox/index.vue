@@ -4,7 +4,7 @@
 		<view>
 			<view>
 				<lc-checkbox v-model="checked">选项一</lc-checkbox>
-				<view>{{checked}}</view>
+				<view>是否选中:{{checked}}</view>
 			</view>	
 		</view>
 		<view>组合使用</view>
@@ -16,6 +16,7 @@
 					</view>
 				</block>
 			</lc-checkbox-group>
+			<view>选中项: {{multiple}}</view>
 		</view>
 		<button @click="bindSubmit" plain>提交</button>
 	</view>
@@ -30,22 +31,22 @@
 		data() {
 			return {
 				checked: true,
-				multiple: ['1', '3'],
+				multiple: ['option1', 'option3'],
 				testOptions: [{
 					sName: 'aaa',
-					sValue: '1'
+					sValue: 'option1'
 				}, {
 					sName: 'bbb',
-					sValue: '2'
+					sValue: 'option2'
 				},{
 					sName: 'ccc',
-					sValue: '3'
+					sValue: 'option3'
 				},{
 					sName: 'ddd',
-					sValue: '4'
+					sValue: 'option4'
 				},{
 					sName: 'eee',
-					sValue: '5'
+					sValue: 'option5'
 				}]
 			}
 		},

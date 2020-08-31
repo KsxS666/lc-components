@@ -2,10 +2,10 @@
 	<view :class="['checkbox-all-area', {'disabled':disabled}]" @click="handleClick">
 		<view class="checkbox_inner">
 			<block v-if="!group">
-				<view :class="['checkbox_input', {'is_checked': currentValue}]"></view>
+				<view :class="['checkbox_input', { 'is_checked': currentValue, 'disabled': disabled }]"></view>
 			</block>
 			<block v-else>
-				<view :class="['checkbox_input', {'is_checked': currentValue2}]"></view>
+				<view :class="['checkbox_input', { 'is_checked': currentValue2, 'disabled': disabled }]"></view>
 			</block>
 			<view class="checkbox_label"><slot></slot></view>
 		</view>
@@ -71,6 +71,7 @@
 					this.parent.change(this.model)
 				} else {
 					this.$emit('input', value)
+					this.$emit('change', value)
 				}
 			},
 			updateModel() {
@@ -122,7 +123,7 @@
 					transform-origin: center;
 				}
 				&.is_checked {
-					background-color: #408CDA;
+					background-color: $cnd-blue-5;
 					border-color: #408CDA;
 					&::after {
 						transform: rotate(45deg) scaleY(1);
@@ -134,7 +135,7 @@
 			}
 		}
 		&.disabled {
-			opacity: .3
+			opacity: .3;
 		}
 	}
 </style>

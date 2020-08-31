@@ -1,6 +1,8 @@
 <template>
 	<view>
 		<navigator url="../checkbox/index">checkbox</navigator>
+		<navigator url="../radio/index">radio</navigator>
+		<navigator url="../datepicker/index">datepicker</navigator>
 	</view>
 </template>
 
